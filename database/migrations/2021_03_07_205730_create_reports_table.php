@@ -15,8 +15,8 @@ class CreateReportsTable extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')
+            $table->unsignedBigInteger('products_id');
+            $table->foreign('products_id')
             ->references('id')
             ->on('products');          
             $table->unsignedBigInteger('category_id');

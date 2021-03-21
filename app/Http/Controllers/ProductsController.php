@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
+use Illuminate\Support\Facades\Validator;
+use App\Products;
 
-class ProductController extends Controller
+
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,17 +33,28 @@ class ProductController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
+               
         $validator = Validator::make($request->all(),
-        [
-            'name' => 'required|unique:product'            
-        ]
-    
-    );
+            [
+                'name' => 'required|unique:products',
+                'category_id' => 'required|int',            
+            ]    
+        );
 
+        if($validator->fails()){
+            return response()->json($validator->errors());
+        }
+     
+        return response()->json(
+            Products::updateOrCreate(
+                ['name' => $request->get('name')],
+                $request->all()
+            )
+        );   
       
     }
 

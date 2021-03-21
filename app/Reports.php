@@ -11,7 +11,7 @@ class Reports extends Model
     protected $table = 'reports';
 
     protected $fillable = [        
-        'product_id',
+        'products_id',
         'category_id',
         'quantity',
         'type',
