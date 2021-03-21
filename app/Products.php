@@ -14,4 +14,8 @@ class Products extends Model
         'quantity', 
         'category_id',
     ];
+
+    protected $hidden = [
+        'deleted_at' 
+      ];
 }

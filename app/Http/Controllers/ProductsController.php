@@ -16,7 +16,7 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        //
+       return Products::where('id', '>', 0)->paginate(1);
     }
 
     /**
@@ -40,8 +40,8 @@ class ProductsController extends Controller
                
         $validator = Validator::make($request->all(),
             [
-                'name' => 'required|unique:products',
-                'category_id' => 'required|int',            
+                'name' => 'required',
+                'category_id' => 'required|int|exists:categories,id',            
             ]    
         );
 
